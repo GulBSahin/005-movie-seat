@@ -9,16 +9,14 @@ function selectedCount(){
         count.innerHTML=seatCount;
         let moviePay = movie.options[movie.selectedIndex].value;
         let movieName = movie.options[movie.selectedIndex].innerHTML;
-        film.innerHTML=movieName;
+        film.innerHTML=movieName.split('(')[0];
         total.innerHTML=parseFloat(moviePay*seatCount);
     }
 movie.onchange=selectedCount;   
 selectedCount();
 //Events
 seats.addEventListener("click", e=>{  
-    e.preventDefault();
-    if(!e.target.classList.contains("occupied")) { 
-    if(e.target.classList.contains("seat")) { 
+    if(e.target.classList.contains("seat")&&!e.target.classList.contains("occupied")){ 
         if(!e.target.classList.contains("selected")) { 
                 e.target.classList.add("selected");
         } else {
@@ -26,5 +24,4 @@ seats.addEventListener("click", e=>{
         } 
         selectedCount()
         }
-    }
     })
