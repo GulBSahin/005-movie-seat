@@ -26,9 +26,12 @@ selectedCount();
 seats.addEventListener("click", e=>{  
     e.preventDefault();
     if(e.target.classList.contains("seat")) { 
+        if(!e.target.classList.contains("occupied")) { 
                 e.target.classList.add("occupied");
-            }else {
+            }
+        else {
                 e.target.classList.remove("occupied"); 
             } 
             selectedCount()
+        }
     })
