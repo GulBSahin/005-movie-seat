@@ -1,23 +1,15 @@
-const picked=document.getElementById("movie");
 const seats=document.querySelector(".container");
 const count=document.getElementById("count"); //will print value 
 const film=document.getElementById("film"); //will print value
 const total=document.getElementById("total"); //will print value
 const movie=document.getElementById("movie");
 
-console.log(movie.value);
-console.log(movie.selectedIndex);
-
 function selectedCount(){
-        seatCount = seats.getElementsByClassName("occupied").length; //length the completed tasks
-        count.innerHTML=seatCount; //send the value to html p element
-        console.log(seatCount);
-        var moviePay = movie.options[movie.selectedIndex].value;
-        console.log(moviePay);
-        var movieName = movie.options[movie.selectedIndex].innerHTML;
-        console.log(movieName);
+        seatCount = seats.getElementsByClassName("selected").length; 
+        count.innerHTML=seatCount;
+        let moviePay = movie.options[movie.selectedIndex].value;
+        let movieName = movie.options[movie.selectedIndex].innerHTML;
         film.innerHTML=movieName;
-        console.log(moviePay);
         total.innerHTML=parseFloat(moviePay*seatCount);
     }
 movie.onchange=selectedCount;   
@@ -25,13 +17,14 @@ selectedCount();
 //Events
 seats.addEventListener("click", e=>{  
     e.preventDefault();
+    if(!e.target.classList.contains("occupied")) { 
     if(e.target.classList.contains("seat")) { 
-        if(!e.target.classList.contains("occupied")) { 
-                e.target.classList.add("occupied");
-            }
-        else {
-                e.target.classList.remove("occupied"); 
-            } 
-            selectedCount()
+        if(!e.target.classList.contains("selected")) { 
+                e.target.classList.add("selected");
+        } else {
+                e.target.classList.remove("selected"); 
+        } 
+        selectedCount()
         }
+    }
     })
